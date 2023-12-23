@@ -4,12 +4,13 @@ const cors = require('cors');
 
 // router
 const userRegRoutes = require('./router/UserRouter');
+const quizRouters = require('./router/QuizQuestion');
 
 const app = new express();
 
 
 // database
-mongoose.connect("mongodb+srv://amruthap8:d5TuXrvZdSv69fEj@cluster0.thrg5ui.mongodb.net/QuizApp?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://amruthap8:pqQeDjWrBgZD0bjl@cluster0.thrg5ui.mongodb.net/QuizApp?retryWrites=true&w=majority")
 .then(()=>{
     console.log("Database Connected");
 })
@@ -25,6 +26,11 @@ app.use(userRegRoutes);
 
 const tagRouter=require('./router/addtags')
 app.use('/',tagRouter);
+
+const resultRouter=require('./router/results')
+app.use('/',resultRouter)
+
+app.use(quizRouters);
 
 // port
 app.listen(4010,()=>{
